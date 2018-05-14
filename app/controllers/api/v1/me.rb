@@ -17,16 +17,14 @@ module API
           }
         end
 
-        # This endpoint doesn't require authentication
-        paginate per_page: 10 # This paginates, with a default of 10 per page
-        get '/items', each_serializer: ItemSerializer do
-          # create some imaginary items
-          items = (0..19).map do |i|
-            ImaginaryItem.new(name: "Foo #{i * 7}", id: i, secret: 'Bar')
-          end
-
-          # We use the item serializer to serialize these items!
-          paginate items
+        desc 'Helloworld' do
+          detail 'Helloworld'
+        end
+        oauth2 # This endpoint requires authentication
+        get '/hello-world' do
+          {
+            hello: 'world'
+          }
         end
 
         desc 'Update user, Protected, only accessible with write user'
